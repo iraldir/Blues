@@ -1,4 +1,9 @@
-.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+.nav,
+.pagination,
+.carousel,
+.panel-title a {
+    cursor: pointer;
+}
 html,
 body {
     height: 100%;
@@ -43,7 +48,6 @@ tr td {} .app #contacts {
 .list {
     position: relative;
 }
-
 .cog {
     position: absolute;
     top: -30px;
@@ -53,7 +57,10 @@ tr td {} .app #contacts {
     cursor: pointer;
     transition: all .5s, color .5s;
 }
-.cog:hover{
+.cog:hover {
     transform: rotate(45deg) scale(1.5);
     color: #57a6e0;
+}
+.modal-dialog .modal-body {
+    padding-bottom: 5px;
 }

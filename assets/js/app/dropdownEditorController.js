@@ -29,8 +29,11 @@
             $scope.itemsToRemove.forEach(function(item){
                 destroyItem(item);
             });
+            $scope.$close();
         };
-
+        $scope.cancel = function(){
+            $scope.$dismiss();
+        }
         function createItem(item) {
             $http.get("http://localhost:1337/" + name + "/create?name="+item.name);
         }

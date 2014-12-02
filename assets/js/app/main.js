@@ -10,6 +10,8 @@
             $modal.open({
                 templateUrl: "templates/newContactEditor.html",
                 controller: "NewContactEditorController",
+                backdrop: 'static',
+                size: 'lg',
                 resolve: {
                 }
             })
@@ -18,6 +20,7 @@
             $modal.open({
                 templateUrl: "templates/dropdownEditor.html",
                 controller: "DropdownEditorController",
+                backdrop: 'static',
                 resolve: {
                     label: function () {
                         return label

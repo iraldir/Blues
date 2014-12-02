@@ -1,152 +1,201 @@
 <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+    <button type="button" class="close" ng-click="cancel()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
     </button>
     <h4 class="modal-title" id="myModalLabel">Ajouter un contact</h4>
 </div>
 <div class="modal-body">
-    <form class="form-horizontal" role="form" novalidate>
-        <div class="form-group row">
-            <div class="col-md-4">
-                <select name="" id="" class="form-control" ng-model="title">
-                    <option value="Monsieur">Monsieur</option>
-                    <option value="Madame">Madame</option>
-                </select>
-            </div>
-            <div class="col-md-4">
-                <input type="text" class="form-control" ng-model="firstName" placeholder="Prénom">
-            </div>
-            <div class="col-md-4">
-                <input type="text" class="form-control" ng-model="lastName" placeholder="Nom">
-            </div>
-        </div>
+    <div class="container col-md-12">
+        <form class="form-horizontal" role="form" novalidate>
+            <div class="row form-group">
+                <div class="col-md-3">
+                    <select name="" id="" class="form-control" ng-model="title">
+                        <option value="Monsieur">Monsieur</option>
+                        <option value="Madame">Madame</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" ng-model="firstName" placeholder="Prénom">
+                </div>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" ng-model="lastName" placeholder="Nom">
+                </div>
 
-        <div class="form-group">
-            <label for="create-contact-companyName" class="col-sm-2 control-label">Entreprise</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" ng-model="companyName" id="create-contact-companyName" placeholder="">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="create-contact-adress" class="col-sm-2 control-label">Adresse</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" ng-model="adress" id="create-contact-adress" placeholder="">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="create-contact-complementoryAdress" class="col-sm-2 control-label">Adresse Suite</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" ng-model="complementoryAdress" id="create-contact-complementoryAdress" placeholder="">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="create-contact-postalCode" class="col-sm-2 control-label">Code Postal</label>
-            <div class="col-md-4">
-                <input type="text" class="form-control" ng-model="postalCode" id="create-contact-postalCode" placeholder="">
-            </div>
-            <label for="create-contact-city" class="col-sm-1 control-label">Ville</label>
-            <div class="col-md-5">
-                <input type="text" class="form-control" ng-model="city" id="create-contact-city" placeholder="">
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-md-4">
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-home"></i></span>
-                    <input type="tel" class="form-control" ng-model="homePhone" id="create-contact-homePhone" placeholder="Tel. Maison">
+                <div class="col-md-3">
+                    <input type="text" class="form-control" ng-model="companyName" id="create-contact-companyName" placeholder="Entreprise">
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-mobile"></i></span>
-                    <input type="tel" class="form-control" ng-model="mobilePhone" id="create-contact-mobilePhone" placeholder="Tel. Mobile">
+            <fieldset>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <input type="text" class="form-control" ng-model="adress" id="create-contact-adress" placeholder="Adresse">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <input type="text" class="form-control" ng-model="complementoryAdress" id="create-contact-complementoryAdress" placeholder="Adresse suite">
+                            </div>
+                        </div>
 
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" ng-model="postalCode" id="create-contact-postalCode" placeholder="Code Postal">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" ng-model="city" id="create-contact-city" placeholder="Ville">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <input type="email" class="form-control" ng-model="mail" id="create-contact-mail" placeholder="Email" required data-bv-emailaddress-message="L'email n'est pas valide">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-home fa-fw"></i></span>
+                                <input type="tel" class="form-control" ng-model="homePhone" id="create-contact-homePhone" placeholder="Tel. Maison">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-mobile fa-fw"></i></span>
+                                <input type="tel" class="form-control" ng-model="mobilePhone" id="create-contact-mobilePhone" placeholder="Tel. Mobile">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-briefcase fa-fw"></i></span>
+                                <input type="tel" class="form-control" ng-model="officePhone" id="create-contact-officePhone" placeholder="Tel. Bureau">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-birthday-cake fa-fw"></i></span>
+                                <input type="date" class="form-control" ng-model="birthday" id="create-contact-birthday" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </fieldset>
+            <div class="form-group row text-center">
+                <div class="col-md-4">
+                    <label class="checkbox-inline">
+                        <input type="checkbox" ng-model="adherent" id="create-contact-adherent" value="option1">Adhérent
+                    </label>
+                </div>
+                <div class="col-md-4">
+                    <label class="checkbox-inline">
+                        <input type="checkbox" ng-model="benevole" id="create-contact-benevole" value="option2">Bénévole
+                    </label>
+                </div>
+                <div class="col-md-4">
+                    <label class="checkbox-inline">
+                        <input type="checkbox" ng-model="donor" id="create-contact-donor" value="option3">Donateur
+                    </label>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-briefcase"></i></span>
-                    <input type="tel" class="form-control" ng-model="officePhone" id="create-contact-officePhone" placeholder="Tel. Bureau">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <label for="create-contact-type" class="control-label">Type de Contact</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class=" col-md-12">
+                            <select class="form-control" ng-model="type" ng-options="type as type.name for type in types" id="create-contact-type">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <label for="create-contact-genre" class="control-label">Genre de Contact</label>
+                        </div>
+                    </div>
+                    <div>
+                            <select class="form-control" ng-model="genre" ng-options="genre as genre.name for genre in genres" id="create-contact-genre">
+                            </select>
+                    </div>
                 </div>
             </div>
-        </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <label for="create-contact-help" class="control-label">Type de Mécénat</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class=" col-md-12">
+                            <select class="form-control" ng-model="help" ng-options="help as help.name for help in helps" id="create-contact-help">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <label for="create-contact-function" class="control-label">Fonction</label>
+                        </div>
+                    </div>
+                    <div>
+                            <select class="form-control" ng-model="role" ng-options="role as role.name for role in roles" id="create-contact-role">
+                            </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                           <label for="create-contact-diverse1" class="control-label">Divers I</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class=" col-md-12">
+                            <select class="form-control" ng-model="diverse1" ng-options="diverse1 as diverse1.name for diverse1 in diverse1s" id="create-contact-diverse1">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                <label for="create-contact-diverse2" class="control-label">Divers II</label>
+                        </div>
+                    </div>
+                    <div>
+                            <select class="form-control" ng-model="role" ng-options="diverse2 as diverse2.name for diverse2 in diverse2s" id="create-contact-diverse2">
+                            </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12" style="margin-top:20px">
+                    <label for="create-contact-comments" class="col-sm-2 control-label">Commentaires</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="comments" id="create-contact-comments" placeholder="">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="clearfix"></div>
 
-
-        <div class="form-group">
-            <label for="create-contact-mail" class="col-sm-2 control-label">E-mail</label>
-            <div class="col-sm-10">
-                <input type="email" class="form-control" ng-model="mail" id="create-contact-mail" placeholder="" required data-bv-emailaddress-message="L'email n'est pas valide">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="create-contact-birthday" class="col-sm-2 control-label">Date de naissance</label>
-            <div class="col-sm-10">
-                <input type="date" class="form-control" ng-model="birthday" id="create-contact-birthday" placeholder="">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="create-contact-type" class="col-sm-2 control-label">Type de Contact</label>
-            <div class="col-sm-10">
-                <select class="form-control"  ng-model="type" ng-options="type as type.name for type in types" id="create-contact-type">
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="create-contact-genre" class="col-sm-2 control-label">Genre de Contact</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" ng-model="genre" id="create-contact-genre" placeholder="">
-            </div>
-        </div>
-        <div class="form-group row text-center">
-            <div class="col-md-4">
-                <label class="checkbox-inline">
-                    <input type="checkbox" ng-model="adherent" id="create-contact-adherent" value="option1">Adhérent
-                </label>
-            </div>
-            <div class="col-md-4">
-                <label class="checkbox-inline">
-                    <input type="checkbox" ng-model="benevole" id="create-contact-benevole" value="option2">Bénévole
-                </label>
-            </div>
-            <div class="col-md-4">
-                <label class="checkbox-inline">
-                    <input type="checkbox" ng-model="donor" id="create-contact-donor" value="option3">Donateur
-                </label>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="create-contact-help" class="col-sm-2 control-label">Type de Mécénat</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" ng-model="help" id="create-contact-help" placeholder="">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="create-contact-diverse1" class="col-sm-2 control-label">Divers I</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" ng-model="diverse1" id="create-contact-diverse1" placeholder="">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="create-contact-diverse2" class="col-sm-2 control-label">Divers II</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" ng-model="diverse2" id="create-contact-diverse2" placeholder="">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="create-contact-function" class="col-sm-2 control-label">Fonction</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" ng-model="function" id="create-contact-function" placeholder="">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="create-contact-comments" class="col-sm-2 control-label">Commentaires</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" ng-model="comments" id="create-contact-comments" placeholder="">
-            </div>
-        </div>
-    </form>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-    <button type="button" class="btn btn-primary">Sauvegarder</button>
-</div>
+    <button class="btn btn-primary" ng-click="save()">OK</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
 </div>
