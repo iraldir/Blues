@@ -1,0 +1,59 @@
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+.app {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+tr td {} .app #contacts {
+    flex: 1;
+    margin: 5px;
+}
+.app #main-buttons {
+    height: 80px;
+}
+.one-line {
+    white-space: nowrap;
+}
+.adress-field {
+    max-height: 40px;
+    min-width: 170px;
+}
+.name-field {
+    white-space: nowrap;
+}
+.boolean-label {
+    width: 15px;
+    position: relative;
+    display: block;
+    height: 60px;
+}
+.boolean-label span {
+    position: absolute;
+    transform: rotate(-90deg);
+    transform-origin: 0 0;
+    top: 60px;
+}
+.list {
+    position: relative;
+}
+
+.cog {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    font-size: 1.5em;
+    margin-left: -10px;
+    cursor: pointer;
+    transition: all .5s, color .5s;
+}
+.cog:hover{
+    transform: rotate(45deg) scale(1.5);
+    color: #57a6e0;
+}

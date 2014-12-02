@@ -1,0 +1,99 @@
+<div class="app" ng-app="blues" ng-controller="MainController">
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">BLUES</a>
+            </div>
+
+            <form class="navbar-form navbar-left">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Filtrer les contacts">
+                </div>
+            </form>
+            <form class="navbar-form navbar-right" role="search">
+                <button class="btn btn-success" ng-click="openNewContactEditor()">Ajouter un contact&nbsp;<i class="fa fa-plus"></i>
+                </button>
+                <button class="btn btn-danger">Supprimer un contact&nbsp;<i class="fa fa-trash-o"></i>
+                </button>
+                <button class="btn btn-warning">Export Excel&nbsp;<i class="fa fa-table"></i>
+                </button>
+                <button class="btn btn-warning">Publipostage&nbsp;<i class="fa fa-tag"></i>
+                </button>
+                <button class="btn btn-warning">Emailing&nbsp;<i class="fa fa-send"></i>
+                </button>
+                <button class="btn btn-warning">Impression&nbsp;<i class="fa fa-print"></i>
+                </button>
+            </form>
+
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <div id="contacts">
+       <button ng-click="openDropdownEditor('test')">qsdf</button>
+        <table class="table table-bordered table-striped table-condensed table-hover">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Entreprise</th>
+                    <th>Adresse</th>
+                    <th>Téléphones</th>
+                    <th>Mail</th>
+                    <th>Date de Naissance</th>
+                    <th><span class="list"><span class="cog" ng-click="openDropdownEditor('des types de contact', 'type')"><i class="fa fa-cog"></i></span>Type de contact</span></th>
+                    <th><span class="list"><span class="cog" ng-click="openDropdownEditor('des genres de contact', 'genre')"><i class="fa fa-cog"></i></span>Genre de contact</span></th>
+                    <th><span class="boolean-label"><span>Adhérent</span></span>
+                    </th>
+                    <th><span class="boolean-label"><span>Bénévole</span></span>
+                    </th>
+                    <th><span class="boolean-label"><span>Donateur</span></span>
+                    </th>
+                    <th><span class="list"><span class="cog" ng-click="openDropdownEditor('des types de mécénat', 'help')"><i class="fa fa-cog"></i></span>Type de mécénat</span></th>
+                    <th><span class="list"><span class="cog" ng-click="openDropdownEditor('de Divers I', 'diverse1')"><i class="fa fa-cog"></i></span>Divers&nbsp;I</span></th>
+                    <th><span class="list"><span class="cog" ng-click="openDropdownEditor('de Divers II', 'diverse2')"><i class="fa fa-cog"></i></span>Divers&nbsp;II</span></th>
+                    <th><span class="list"><span class="cog" ng-click="openDropdownEditor('des fonctions', 'function')"><i class="fa fa-cog"></i></span>Fonction</span></th>
+                    <th>Commentaire</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="contact in contacts" ng-click="$parent.activeRow=$index" ng-class="$parent.activeRow==$index ? 'info' : false">
+                    <td>
+                        <div class="name-field">{{contact.title}} {{contact.lastName}} {{contact.firstName}}</div>
+                    </td>
+                    <td>{{contact.companyName}}</td>
+                    <td>
+                        <div class="adress-field">{{contact.adress}} {{contact.complementoryAdress}} {{contact.postalCode}} {{contact.city}}</div>
+                    </td>
+                    <td>
+                        <span class="one-line" ng-if="contact.homePhone"><i class="fa fa-phone fa-fw"></i>&nbsp;{{contact.homePhone}}</span>
+                        <span class="one-line" ng-if="contact.mobilePhone"><i class="fa fa-mobile fa-fw"></i>&nbsp;{{contact.mobilePhone}}</span>
+                        <span class="one-line" ng-if="contact.officePhone"><i class="fa fa-briefcase fa-fw"></i>&nbsp;{{contact.officePhone}}</span>
+                    </td>
+                    <td>{{contact.mail}}</td>
+                    <td>{{contact.birthday}}</td>
+                    <td>{{contact.type}}</td>
+                    <td>{{contact.genre}}</td>
+                    <td>
+                        <span ng-if="contact.adherent"><i class="fa fa-cc-visa"></i></span>
+                        <span ng-if="!contact.adherent"><i class="fa fa-minus"></i></span>
+                    </td>
+                    <td>
+                        <span ng-if="contact.benevole"><i class="fa fa-thumbs-o-up"></i></span>
+                        <span ng-if="!contact.benevole"><i class="fa fa-minus"></i></span>
+                    </td>
+                    <td>
+                        <span ng-if="contact.donor"><i class="fa fa-heart"></i></span>
+                        <span ng-if="!contact.donor"><i class="fa fa-minus"></i></span>
+                    </td>
+                    <td>
+                        {{contact.help}}
+                    </td>
+                    <td>{{contact.diverse1}}</td>
+                    <td>{{contact.diverse2}}</td>
+                    <td>{{contact.function}}</td>
+                    <td>{{contact.comments}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
