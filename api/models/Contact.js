@@ -20,7 +20,7 @@ module.exports = {
         mobilePhone: 'string',
         officePhone: 'string',
         mail: 'string',
-        birthday: 'date',
+        birthday: 'string',
         sexe: {
             type: 'string',
             enum: ['male', 'female']
@@ -43,7 +43,9 @@ module.exports = {
         diverse2: {
             model: 'diverse2'
         },
-        function: 'string',
+        role:{
+            model: 'role'
+        },
         comments: 'string'
     }
 };

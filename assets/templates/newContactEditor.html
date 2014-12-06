@@ -41,10 +41,10 @@
                         <div class="row">
                             <div class="form-group col-md-12">
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <input type="text" class="form-control" ng-model="postalCode" id="create-contact-postalCode" placeholder="Code Postal">
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-8">
                                         <input type="text" class="form-control" ng-model="city" id="create-contact-city" placeholder="Ville">
                                     </div>
                                 </div>
@@ -52,7 +52,7 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-md-12">
-                                <input type="email" class="form-control" ng-model="mail" id="create-contact-mail" placeholder="Email" required data-bv-emailaddress-message="L'email n'est pas valide">
+                                <input type="email" class="form-control" ng-model="email" id="create-contact-mail" placeholder="Email" required data-bv-emailaddress-message="L'email n'est pas valide">
                             </div>
                         </div>
                     </div>
@@ -79,7 +79,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-birthday-cake fa-fw"></i></span>
-                                <input type="date" class="form-control" ng-model="birthday" id="create-contact-birthday" placeholder="">
+                                <input type="text" class="form-control" ng-model="birthday" id="create-contact-birthday" placeholder="">
                             </div>
                         </div>
                     </div>
@@ -113,8 +113,15 @@
                     </div>
                     <div class="row">
                         <div class=" col-md-12">
-                            <select class="form-control" ng-model="type" ng-options="type as type.name for type in types" id="create-contact-type">
-                            </select>
+                            <div class="input-group">
+                                <select class="form-control" ng-model="type" ng-options="type as type.name for type in types" id="create-contact-type"></select>
+                                <span class="input-group-btn">
+                                  <button class="btn btn-primary" type="button" ng-click="openDropdownEditor('des types de contact', 'type')">
+                                    <i class="fa fa-fw fa-cog"></i>
+                                  </button>
+                               </span>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -125,8 +132,14 @@
                         </div>
                     </div>
                     <div>
-                            <select class="form-control" ng-model="genre" ng-options="genre as genre.name for genre in genres" id="create-contact-genre">
-                            </select>
+                        <div class="input-group">
+                            <select class="form-control" ng-model="genre" ng-options="genre as genre.name for genre in genres" id="create-contact-genre"></select>
+                            <span class="input-group-btn">
+                              <button class="btn btn-primary" type="button" ng-click="openDropdownEditor('des genres de contact', 'genre')"><i class="fa fa-fw fa-cog"></i>
+                            </button>
+    </span>
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -139,8 +152,15 @@
                     </div>
                     <div class="row">
                         <div class=" col-md-12">
+                           <div class="input-group">
                             <select class="form-control" ng-model="help" ng-options="help as help.name for help in helps" id="create-contact-help">
                             </select>
+                            <span class="input-group-btn">
+                                  <button class="btn btn-primary" type="button" ng-click="openDropdownEditor('des types de de Mécénat', 'help')">
+                                    <i class="fa fa-fw fa-cog"></i>
+                                  </button>
+                               </span>
+                           </div>
                         </div>
                     </div>
                 </div>
@@ -151,8 +171,15 @@
                         </div>
                     </div>
                     <div>
-                            <select class="form-control" ng-model="role" ng-options="role as role.name for role in roles" id="create-contact-role">
-                            </select>
+                        <div class="input-group">
+                             <select class="form-control" ng-model="role" ng-options="role as role.name for role in roles" id="create-contact-role">
+                        </select>
+                            <span class="input-group-btn">
+                                  <button class="btn btn-primary" type="button" ng-click="openDropdownEditor('des fonctions', 'role')">
+                                    <i class="fa fa-fw fa-cog"></i>
+                                  </button>
+                               </span>
+                           </div>
                     </div>
                 </div>
             </div>
@@ -160,25 +187,43 @@
                 <div class="col-md-6">
                     <div class="row">
                         <div class="col-md-12 text-center">
-                           <label for="create-contact-diverse1" class="control-label">Divers I</label>
+                            <label for="create-contact-diverse1" class="control-label">Divers I</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class=" col-md-12">
-                            <select class="form-control" ng-model="diverse1" ng-options="diverse1 as diverse1.name for diverse1 in diverse1s" id="create-contact-diverse1">
+                           <div class="input-group">
+                           <select class="form-control" ng-model="diverse1" ng-options="diverse1 as diverse1.name for diverse1 in diverse1s" id="create-contact-diverse1">
                             </select>
+                        </select>
+                            <span class="input-group-btn">
+                                  <button class="btn btn-primary" type="button" ng-click="openDropdownEditor('de Divers I', 'diverse1')">
+                                    <i class="fa fa-fw fa-cog"></i>
+                                  </button>
+                               </span>
+                           </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="row">
                         <div class="col-md-12 text-center">
-                <label for="create-contact-diverse2" class="control-label">Divers II</label>
+                            <label for="create-contact-diverse2" class="control-label">Divers II</label>
                         </div>
                     </div>
                     <div>
+                       <div class="input-group">
                             <select class="form-control" ng-model="role" ng-options="diverse2 as diverse2.name for diverse2 in diverse2s" id="create-contact-diverse2">
-                            </select>
+                        </select>
+                        </select>
+                            <span class="input-group-btn">
+                                  <button class="btn btn-primary" type="button" ng-click="openDropdownEditor('de Divers II', 'diverse2')">
+                                    <i class="fa fa-fw fa-cog"></i>
+                                  </button>
+                               </span>
+                           </div>
+                        </div>
+                       
                     </div>
                 </div>
             </div>
