@@ -6,6 +6,9 @@
  */
 
 module.exports = {
-	
+    length: function (req, res) {
+        Contact.find().exec(function(err, contacts){
+            res.send(contacts.length.toString());
+        });
+    }
 };
-

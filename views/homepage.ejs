@@ -1,5 +1,5 @@
 <div class="app" ng-app="blues" ng-controller="MainController">
-    <nav class="navbar navbar-inverse" role="navigation">
+    <nav class="navbar navbar-inverse navbar-fixed-top " role="navigation">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -12,6 +12,18 @@
                 </div>
             </form>
             <form class="navbar-form navbar-right" role="search">
+               
+               
+                <div class="form-group">
+                   <div class="input-group">
+                        <input type="number" min="1" class="form-control" ng-init="contactToGenerate=1" style="width:70px" ng-model="contactToGenerate">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" ng-click="generateFakeContacts()"><i class="fa fa-magic"></i></button>
+                        </div>                       
+                   </div>
+                </div>
+                <button class="btn btn-default" ng-click="openSettingsEditor()"><i class="fa fa-cogs"></i>
+                </button>
                 <button class="btn btn-success" ng-click="openNewContactEditor()"><i class="fa fa-plus"></i>
                 </button>
                 <button class="btn btn-primary" ng-click="openEditContactEditor()" ng-disabled="activeRow == undefined"><i class="fa fa-pencil"></i>

@@ -44,7 +44,7 @@ module.exports = {
             model: 'diverse2'
         },
         role:{
-            model: 'role'
+            type: 'string'
         },
         comments: 'string'
     }
