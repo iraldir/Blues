@@ -1,6 +1,6 @@
 (function () {
     "use strict";
-    var blues = angular.module('blues', ['ui.bootstrap']);
+    var blues = angular.module('blues', ['ui.bootstrap', 'angularjs-dropdown-multiselect']);
     blues.controller('MainController', function ($scope, $modal, $http) {
         $scope.contactsLength = 0;
 
@@ -9,9 +9,15 @@
             $http.get("http://localhost:1337/contact/length").success(function (data) {
                 $scope.contactsLength = Number(data);
             });
-            $http.get("http://localhost:1337/contact/").success(function (data) {
-                $scope.contacts = data;
-            });
+            if ($scope.filter){
+                $http.get("http://localhost:1337/contact/smartfind/"+$scope.filter).success(function (data) {
+                    $scope.contacts = data;
+                });
+            } else {
+                $http.get("http://localhost:1337/contact/").success(function (data) {
+                    $scope.contacts = data;
+                });
+            }
         };
 
         $scope.openDropdownEditor = function (label, name) {
@@ -68,7 +74,13 @@
                 });
             }
         };
-
+        $scope.openExtraction = function(){
+            $modal.open({
+                templateUrl: "templates/extraction.html",
+                controller: "ExtractionController",
+                size: 'lg'
+            });
+        };
 
         $scope.removeSelectedContact = function () {
             var contact = $scope.contacts[$scope.activeRow];

@@ -1,7 +1,7 @@
 <div class="modal-header">
     <button type="button" class="close" ng-click="cancel()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
     </button>
-    <h4 class="modal-title" id="myModalLabel">Ajouter un contact</h4>
+    <h4 class="modal-title" id="myModalLabel"> <span ng-if="editMode">Editer un contact</span> <span ng-if="!editMode">Ajouter un contact</span></h4>
 </div>
 <div class="modal-body">
     <div class="container col-md-12">
@@ -241,5 +241,5 @@
 </div>
 <div class="modal-footer">
     <button class="btn btn-primary" ng-click="save()">OK</button>
-    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    <button class="btn btn-warning" ng-click="cancel()">Annuler</button>
 </div>

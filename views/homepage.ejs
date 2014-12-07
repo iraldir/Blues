@@ -8,7 +8,7 @@
 
             <form class="navbar-form navbar-left">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Filtrer les contacts">
+                    <input type="text" class="form-control" placeholder="Filtrer les contacts" ng-model="filter" ng-change="fetchContacts()">
                 </div>
             </form>
             <form class="navbar-form navbar-right" role="search">
@@ -22,21 +22,15 @@
                         </div>                       
                    </div>
                 </div>
-                <button class="btn btn-default" ng-click="openSettingsEditor()"><i class="fa fa-cogs"></i>
+                <button class="btn btn-success" ng-click="openNewContactEditor()">Ajouter un contact&nbsp;<i class="fa fa-plus"></i>
                 </button>
-                <button class="btn btn-success" ng-click="openNewContactEditor()"><i class="fa fa-plus"></i>
+                <button class="btn btn-primary" ng-click="openEditContactEditor()" ng-disabled="activeRow == undefined">Editer&nbsp;<i class="fa fa-pencil"></i>
                 </button>
-                <button class="btn btn-primary" ng-click="openEditContactEditor()" ng-disabled="activeRow == undefined"><i class="fa fa-pencil"></i>
+                <button class="btn btn-danger" ng-click="removeSelectedContact()" ng-disabled="activeRow == undefined">Supprimer&nbsp;<i class="fa fa-trash-o"></i>
                 </button>
-                <button class="btn btn-danger" ng-click="removeSelectedContact()" ng-disabled="activeRow == undefined"><i class="fa fa-trash-o"></i>
+                <button class="btn btn-warning" ng-click="openExtraction()">Extraction&nbsp;<i class="fa fa-download"></i>
                 </button>
-                <button class="btn btn-warning">Excel&nbsp;<i class="fa fa-table"></i>
-                </button>
-                <button class="btn btn-warning">Publipostage&nbsp;<i class="fa fa-tag"></i>
-                </button>
-                <button class="btn btn-warning">Emailing&nbsp;<i class="fa fa-send"></i>
-                </button>
-                <button class="btn btn-warning">Impression&nbsp;<i class="fa fa-print"></i>
+                 <button class="btn btn-default" ng-click="openSettingsEditor()">Paramètres&nbsp;<i class="fa fa-cogs"></i>
                 </button>
             </form>
 

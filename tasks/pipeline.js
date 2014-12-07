@@ -32,6 +32,8 @@ var jsFilesToInject = [
 
   // Dependencies like jQuery, or Angular are brought in here
   'js/dependencies/jquery*.js',
+  'js/dependencies/angular.js',
+  'js/dependencies/lodash.min.js',
   'js/dependencies/**/*.js',
   'js/app/main.js',
   'js/app/**/*.js',

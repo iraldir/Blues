@@ -9,7 +9,8 @@
         $scope.newName = "";
         $scope.createNewItem = function () {
             $scope.items.push({
-                name: $scope.newName
+                name: $scope.newName,
+                oldName: $scope.newName
             });
             $scope.newName = "";
         };
@@ -26,6 +27,11 @@
                     updateItem(item);
                 }
             });
+            if ($scope.newName){
+                createItem({
+                    name: $scope.newName
+                });
+            }
             $scope.itemsToRemove.forEach(function(item){
                 destroyItem(item);
             });

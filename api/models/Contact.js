@@ -19,7 +19,7 @@ module.exports = {
         homePhone: 'string',
         mobilePhone: 'string',
         officePhone: 'string',
-        mail: 'string',
+        email: 'string',
         birthday: 'string',
         sexe: {
             type: 'string',

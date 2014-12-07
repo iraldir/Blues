@@ -34,7 +34,8 @@ module.exports.routes = {
 
   '/': {
     view: 'homepage'
-  }
+  },
+  '/contact/smartfind/:query':'ContactController.smartfind'
 
   /***************************************************************************
   *                                                                          *
