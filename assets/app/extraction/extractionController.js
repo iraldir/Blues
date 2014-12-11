@@ -2,7 +2,7 @@
     "use strict";
     var properties = ["title", "firstName", "lastName", "companyName", "adress", "complementoryAdress", "postalCode", "city", "homePhone", "mobilePhone", "officePhone", "email", "birthday", "adherent", "benevole", "donor", "type", "genre", "help", "role", "diverse1", "diverse2", "comments"];
     var blues = angular.module('blues');
-    blues.controller("ExtractionController", function ($scope, $http) {
+    blues.controller("ExtractionController", function ($scope, $http, dropdownService) {
 
         $scope.multiSelectTranslations = {
             uncheckAll: "Tout désélectionner",
@@ -81,21 +81,7 @@
             }
         };
         $scope.refresh = function () {
-            $http.get("http://localhost:1337/type/").success(function (data) {
-                $scope.types = data;
-            });
-            $http.get("http://localhost:1337/genre/").success(function (data) {
-                $scope.genres = data;
-            });
-            $http.get("http://127.0.0.1:1337/help/").success(function (data) {
-                $scope.helps = data;
-            });
-            $http.get("http://localhost:1337/diverse1/").success(function (data) {
-                $scope.diverse1s = data;
-            });
-            $http.get("http://localhost:1337/diverse2/").success(function (data) {
-                $scope.diverse2s = data;
-            });
+            dropdownService.getCategories($scope);
         };
         $scope.refresh();
     });

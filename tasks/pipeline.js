@@ -36,7 +36,8 @@ var jsFilesToInject = [
   'js/dependencies/lodash.min.js',
   'js/dependencies/**/*.js',
   'app/main.js',
-  'app/**/*.js',
+  'app/*.js',
+  'app/**/*.js'
   // All of the rest of your client-side js files
   // will be injected here in no particular order.
   //'js/**/*.js'

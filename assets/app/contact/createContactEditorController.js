@@ -2,7 +2,7 @@
     "use strict";
     var properties = ["title", "firstName", "lastName", "companyName", "adress", "complementoryAdress", "postalCode", "city", "homePhone", "mobilePhone", "officePhone", "email", "birthday", "adherent", "benevole", "donor", "type", "genre", "help", "role", "diverse1", "diverse2", "comments"];
     var blues = angular.module('blues');
-    blues.controller("NewContactEditorController", function ($scope, $http, $log, contact, openDropdownEditor) {
+    blues.controller("NewContactEditorController", function ($scope, $http, $log, contact, openDropdownEditor, dropdownService) {
         $scope.title = "Monsieur";
         $scope.firstName = "";
         $scope.lastName = "";
@@ -42,96 +42,38 @@
             });
         }
         $scope.refresh = function () {
-            if ($scope.type && $scope.type.id) {
-                $scope.type = $scope.type.id;
-            }
-            if ($scope.genre && $scope.genre.id) {
-                $scope.genre = $scope.genre.id;
-            }
-            if ($scope.help && $scope.help.id) {
-                $scope.help = $scope.help.id;
-            }
-            if ($scope.diverse1 && $scope.diverse1.id) {
-                $scope.diverse1 = $scope.diverse1.id;
-            }
-            if ($scope.diverse2 && $scope.diverse2.id) {
-                $scope.diverse2 = $scope.diverse2.id;
-            }
-            $http.get("http://localhost:1337/type/")
-                .success(function (data) {
-                    $scope.types = data;
-                    if (!$scope.type && !$scope.editMode) {
-                        $scope.type = data[0];
-                    } else if (typeof $scope.type == "number") {
-                        var real_type = $scope.types.filter(function (type) {
-                            return type.id == $scope.type
+            var dropdownFields = ["type", "genre", "help", "diverse1", "diverse2"];
+            
+            dropdownFields.forEach(function(field){
+                if ($scope[field] && $scope[field].id){
+                    $scope[field] = $scope[field].id;
+                }
+            });
+            
+            dropdownService.getCategories($scope).then(function(){
+                dropdownFields.forEach(function(field){
+                    var fields = field + "s";
+                    if(!$scope[field] && !$scope.editMode){
+                        $scope[field] = $scope[fields][0];
+                    } else if (typeof $scope[field] === "number"){
+                        var realField = $scope[fields].filter(function (t){
+                            return t.id === $scope[field];
                         })[0];
-                        if (real_type) {
-                            $scope.type = real_type;
+                        if (realField){
+                            $scope[field] = realField;
                         }
                     }
                 });
-            $http.get("http://localhost:1337/genre/").success(function (data) {
-                $scope.genres = data;
-                if (!$scope.genre && !$scope.editMode) {
-                    $scope.genre = data[0]
-                } else if (typeof $scope.genre == "number") {
-                    var real_genre = $scope.genres.filter(function (genre) {
-                        return genre.id == $scope.genre
-                    })[0];
-                    if (real_genre) {
-                        $scope.genre = real_genre;
-                    }
-                }
             });
-            $http.get("http://127.0.0.1:1337/help/").success(function (data) {
-                $scope.helps = data;
-                if (!$scope.help && !$scope.editMode) {
-                    $scope.help = data[0]
-                } else if (typeof $scope.help == "number") {
-                    var real_help = $scope.helps.filter(function (help) {
-                        return help.id == $scope.help
-                    })[0];
-                    if (real_help) {
-                        $scope.help = real_help;
-                    }
-                }
-            });
-            $http.get("http://localhost:1337/diverse1/").success(function (data) {
-                $scope.diverse1s = data;
-                if (!$scope.diverse1 && !$scope.editMode) {
-                    $scope.diverse1 = data[0]
-                } else if (typeof $scope.diverse1 == "number") {
-                    var real_diverse1 = $scope.diverse1s.filter(function (diverse1) {
-                        return diverse1.id == $scope.diverse1
-                    })[0];
-                    if (real_diverse1) {
-                        $scope.diverse1 = real_diverse1;
-                    }
-                }
-            });
-            $http.get("http://localhost:1337/diverse2/").success(function (data) {
-                $scope.diverse2s = data;
-                if (!$scope.diverse2 && !$scope.editMode) {
-                    $scope.diverse2 = data[0]
-                } else if (typeof $scope.diverse2 == "number") {
-                    var real_diverse2 = $scope.diverse2.filter(function (diverse2) {
-                        return diverse2.id == $scope.diverse2
-                    })[0];
-                    if (real_diverse2) {
-                        $scope.diverse2 = real_diverse2;
-                    }
-                }
-            });
-        }
+        };
         $scope.openDropdownEditor = function () {
             openDropdownEditor.apply(null, arguments).result.then(function () {
                 $scope.refresh();
             });
-        }
+        };
         $scope.cancel = function () {
             $scope.$dismiss();
-        }
+        };
         $scope.save = function () {
             var args = "";
             properties.forEach(function (property) {
@@ -153,13 +95,13 @@
                 if ($scope.editMode) {
                     method = "update/" + $scope.id + "?";
                 } else {
-                    method = "create?"
+                    method = "create?";
                 }
                 $http.get("http://localhost:1337/contact/" + method + args).success(function () {
                     $scope.$close();
                 });
             }
-        }
+        };
         $scope.refresh();
     });
 })();

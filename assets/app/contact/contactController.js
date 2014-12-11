@@ -1,7 +1,8 @@
 (function(){
 	"use strict";
 	var blues = angular.module("blues");
-	blues.controller('MainController', function ($scope, $modal, $http) {
+	blues.controller('ContactController', function ($scope, $modal, $http) {
+        
         $scope.contactsLength = 0;
 
         $scope.fetchContacts = function () {
