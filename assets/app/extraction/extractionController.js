@@ -23,8 +23,8 @@
 		};
 		$scope.columnOptions = {
 			displayProp: "name",
-			selectedClasses: "btn btn-warning",
-			buttonClasses: "btn btn-primary",
+			selectedClasses: "btn btn-success",
+			buttonClasses: "btn btn-default",
 			scrollable: true,
 			scrollableHeight: '200px'
 		};

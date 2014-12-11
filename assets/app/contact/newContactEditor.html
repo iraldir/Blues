@@ -79,7 +79,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-birthday-cake fa-fw"></i></span>
-                                <input type="text" class="form-control" ng-model="birthday" id="create-contact-birthday" placeholder="">
+                                <input type="text" class="form-control" ng-model="birthday" id="create-contact-birthday" placeholder="Date de naissance">
                             </div>
                         </div>
                     </div>
@@ -116,7 +116,7 @@
                             <div class="input-group">
                                 <select class="form-control" ng-model="type" ng-options="type as type.name for type in types" id="create-contact-type"></select>
                                 <span class="input-group-btn">
-                                  <button class="btn btn-primary" type="button" ng-click="openDropdownEditor('des types de contact', 'type')">
+                                  <button class="btn btn-default" type="button" ng-click="openDropdownEditor('des types de contact', 'type')">
                                     <i class="fa fa-fw fa-cog"></i>
                                   </button>
                                </span>
@@ -135,7 +135,7 @@
                         <div class="input-group">
                             <select class="form-control" ng-model="genre" ng-options="genre as genre.name for genre in genres" id="create-contact-genre"></select>
                             <span class="input-group-btn">
-                              <button class="btn btn-primary" type="button" ng-click="openDropdownEditor('des genres de contact', 'genre')"><i class="fa fa-fw fa-cog"></i>
+                              <button class="btn btn-default" type="button" ng-click="openDropdownEditor('des genres de contact', 'genre')"><i class="fa fa-fw fa-cog"></i>
                             </button>
     </span>
 
@@ -156,7 +156,7 @@
                                 <select class="form-control" ng-model="help" ng-options="help as help.name for help in helps" id="create-contact-help">
                                 </select>
                                 <span class="input-group-btn">
-                                  <button class="btn btn-primary" type="button" ng-click="openDropdownEditor('des types de de Mécénat', 'help')">
+                                  <button class="btn btn-default" type="button" ng-click="openDropdownEditor('des types de de Mécénat', 'help')">
                                     <i class="fa fa-fw fa-cog"></i>
                                   </button>
                                </span>
@@ -195,7 +195,7 @@
                                 </select>
                                 </select>
                                 <span class="input-group-btn">
-                                  <button class="btn btn-primary" type="button" ng-click="openDropdownEditor('de Divers I', 'diverse1')">
+                                  <button class="btn btn-default" type="button" ng-click="openDropdownEditor('de Divers I', 'diverse1')">
                                     <i class="fa fa-fw fa-cog"></i>
                                   </button>
                                </span>
@@ -216,7 +216,7 @@
                             </select>
                             </select>
                             <span class="input-group-btn">
-                                  <button class="btn btn-primary" type="button" ng-click="openDropdownEditor('de Divers II', 'diverse2')">
+                                  <button class="btn btn-default" type="button" ng-click="openDropdownEditor('de Divers II', 'diverse2')">
                                     <i class="fa fa-fw fa-cog"></i>
                                   </button>
                                </span>
@@ -241,5 +241,5 @@
 </div>
 <div class="modal-footer">
     <button class="btn btn-primary" ng-click="save()">OK</button>
-    <button class="btn btn-warning" ng-click="cancel()">Annuler</button>
+    <button class="btn btn-default" ng-click="cancel()">Annuler</button>
 </div>
