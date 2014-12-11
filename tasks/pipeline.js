@@ -35,8 +35,8 @@ var jsFilesToInject = [
   'js/dependencies/angular.js',
   'js/dependencies/lodash.min.js',
   'js/dependencies/**/*.js',
-  'js/app/main.js',
-  'js/app/**/*.js',
+  'app/main.js',
+  'app/**/*.js',
   // All of the rest of your client-side js files
   // will be injected here in no particular order.
   //'js/**/*.js'
@@ -53,7 +53,7 @@ var jsFilesToInject = [
 // templates get spit out to the same file.  Be sure and check out `tasks/README.md`
 // for information on customizing and installing new tasks.
 var templateFilesToInject = [
-  'templates/**/*.html'
+  'app/**/*.html'
 ];
 
 

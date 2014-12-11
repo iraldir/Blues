@@ -1,0 +1,28 @@
+<div class="modal-header">
+    <h3 class="modal-title">Edition {{label}}</h3>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal" role="form" novalidate>
+        <div class="form-group">
+            <div class="input-group">
+                <input type="text" class="form-control" ng-model="newName">
+                <span class="input-group-btn">
+                        <button class="btn btn-success" ng-click="createNewItem()"><i class="fa fa-plus"></i></button>
+                    </span>
+            </div>
+        </div>
+        <div ng-repeat="item in items" class="form-group">
+            <div class="input-group">
+                <input type="text" ng-model="item.name" class="form-control">
+                <span class="input-group-btn">
+                <button class="btn btn-danger" ng-click="deleteItem(item)"><i class="fa fa-trash-o"></i></button>
+            </span> 
+
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="save()">OK</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>

@@ -3,7 +3,8 @@
   "devel":true,
   "eqeqeq": true,
   "globals":{
-    "angular": true
+    "angular": true,
+	"chance": true
   },
   "indent":2,
   "strict": true,

@@ -1,7 +1,7 @@
-(function () {
-    "use strict";
-    var blues = angular.module('blues', ['ui.bootstrap', 'angularjs-dropdown-multiselect']);
-    blues.controller('MainController', function ($scope, $modal, $http) {
+(function(){
+	"use strict";
+	var blues = angular.module("blues");
+	blues.controller('MainController', function ($scope, $modal, $http) {
         $scope.contactsLength = 0;
 
         $scope.fetchContacts = function () {
@@ -22,22 +22,22 @@
 
         $scope.openDropdownEditor = function (label, name) {
             return $modal.open({
-                templateUrl: "templates/dropdownEditor.html",
+                templateUrl: "app/dropdown/dropdownEditor.html",
                 controller: "DropdownEditorController",
                 backdrop: 'static',
                 resolve: {
                     label: function () {
-                        return label
+                        return label;
                     },
                     name: function () {
-                        return name
+                        return name;
                     }
                 }
             });
         };
         $scope.openNewContactEditor = function () {
             $modal.open({
-                templateUrl: "templates/newContactEditor.html",
+                templateUrl: "app/contact/newContactEditor.html",
                 controller: "NewContactEditorController",
                 backdrop: 'static',
                 size: 'lg',
@@ -76,7 +76,7 @@
         };
         $scope.openExtraction = function(){
             $modal.open({
-                templateUrl: "templates/extraction.html",
+                templateUrl: "app/extraction/extraction.html",
                 controller: "ExtractionController",
                 size: 'lg'
             });
@@ -85,9 +85,9 @@
         $scope.removeSelectedContact = function () {
             var contact = $scope.contacts[$scope.activeRow];
             if (contact) {
-                $http.get("http://localhost:1337/contact/destroy/" + contact.id).success(function (data) {
+                $http.get("http://localhost:1337/contact/destroy/" + contact.id).success(function () {
                     $scope.contacts.splice($scope.contacts.indexOf(contact), 1);
-                })
+                });
             }
         };
 
@@ -104,7 +104,7 @@
                 var city = chance.city();
                 var email = chance.email({
                     domain: "gmail.com"
-                })
+                });
                 var homePhone = null,
                     mobilePhone = null,
                     officePhone = null;
@@ -154,7 +154,7 @@
                     max: 4
                 });
                 var comments = null;
-                if (Math.random() > .5) {
+                if (Math.random() > 0.5) {
                     comments = chance.sentence();
                 }
 
@@ -195,16 +195,20 @@
                         args += options[property];
                     }
                 }
-                var method = "create?"
+                var method = "create?";
                 if (args) {
-                    $http.get("http://localhost:1337/contact/" + method + args).success(function () {
+                    callMethod(method, args);
+                }
+            }
+        };
+		
+		function callMethod(method, args){
+			$http.get("http://localhost:1337/contact/" + method + args).success(function () {
                         $http.get("http://localhost:1337/contact/").success(function (data) {
                             $scope.contacts = data;
                         });
                     });
-                }
-            }
-        }
+		}
         $scope.fetchContacts();
     });
-})()
+})();
