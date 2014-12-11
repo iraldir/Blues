@@ -2,7 +2,7 @@
     "use strict";
     var properties = ["title", "firstName", "lastName", "companyName", "adress", "complementoryAdress", "postalCode", "city", "homePhone", "mobilePhone", "officePhone", "email", "birthday", "adherent", "benevole", "donor", "type", "genre", "help", "role", "diverse1", "diverse2", "comments"];
     var blues = angular.module('blues');
-    blues.controller("ExtractionController", function ($scope, $http, $log) {
+    blues.controller("ExtractionController", function ($scope, $http) {
 
         $scope.multiSelectTranslations = {
             uncheckAll: "Tout désélectionner",
@@ -48,9 +48,6 @@
         $scope.help = [];
         $scope.diverse1 = [];
         $scope.diverse2 = [];
-        var contact = null;
-        var openDropdownEditor = null;
-
 
         $scope.cancel = function () {
             $scope.$dismiss();
