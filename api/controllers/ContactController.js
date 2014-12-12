@@ -14,7 +14,6 @@ module.exports = {
     smartfind: function (req, res) {
         var search = req.param('query');
         var realSearch = search.split(' ');
-        sails.log.debug("real Search", realSearch);
         var firstWord = realSearch[0];
         var secondWord = realSearch[1];
         var contacts = Contact.find().populateAll();

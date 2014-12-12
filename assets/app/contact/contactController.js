@@ -1,8 +1,8 @@
-(function(){
-	"use strict";
-	var blues = angular.module("blues");
-	blues.controller('ContactController', function ($scope, $modal, $http) {
-        
+(function () {
+    "use strict";
+    var blues = angular.module("blues");
+    blues.controller('ContactController', function ($scope, $modal, $http) {
+
         $scope.contactsLength = 0;
 
         $scope.fetchContacts = function () {
@@ -10,8 +10,8 @@
             $http.get("http://localhost:1337/contact/length").success(function (data) {
                 $scope.contactsLength = Number(data);
             });
-            if ($scope.filter){
-                $http.get("http://localhost:1337/contact/smartfind/"+$scope.filter).success(function (data) {
+            if ($scope.filter) {
+                $http.get("http://localhost:1337/contact/smartfind/" + $scope.filter).success(function (data) {
                     $scope.contacts = data;
                 });
             } else {
@@ -75,7 +75,7 @@
                 });
             }
         };
-        $scope.openExtraction = function(){
+        $scope.openExtraction = function () {
             $modal.open({
                 templateUrl: "app/extraction/extraction.html",
                 controller: "ExtractionController",
@@ -202,14 +202,14 @@
                 }
             }
         };
-		
-		function callMethod(method, args){
-			$http.get("http://localhost:1337/contact/" + method + args).success(function () {
-                        $http.get("http://localhost:1337/contact/").success(function (data) {
-                            $scope.contacts = data;
-                        });
-                    });
-		}
+
+        function callMethod(method, args) {
+            $http.get("http://localhost:1337/contact/" + method + args).success(function () {
+                $http.get("http://localhost:1337/contact/").success(function (data) {
+                    $scope.contacts = data;
+                });
+            });
+        }
         $scope.fetchContacts();
     });
 })();

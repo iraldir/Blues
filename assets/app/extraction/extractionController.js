@@ -1,8 +1,10 @@
 (function () {
     "use strict";
     var properties = ["title", "firstName", "lastName", "companyName", "adress", "complementoryAdress", "postalCode", "city", "homePhone", "mobilePhone", "officePhone", "email", "birthday", "adherent", "benevole", "donor", "type", "genre", "help", "role", "diverse1", "diverse2", "comments"];
+    var filterableProperties = ["adherent", "benevole", "donor", "type", "genre", "help", "diverse1", "diverse2"];
+
     var blues = angular.module('blues');
-    blues.controller("ExtractionController", function ($scope, $http, dropdownService) {
+    blues.controller("ExtractionController", function ($scope, $http, $window, dropdownService) {
 
         $scope.multiSelectTranslations = {
             uncheckAll: "Tout désélectionner",
@@ -13,31 +15,38 @@
         $scope.multiSelectOptions = {
             showCheckAll: false,
             displayProp: "name",
-            selectedClasses: "btn btn-success"
+            selectedClasses: "btn btn-info"
         };
-		$scope.columnTranslations =  {
-			checkAll: "Tout sélectionner",
-			uncheckAll: "Tout désélectionner",
-			buttonDefaultText: "Tout exporter",
+        $scope.columnTranslations = {
+            checkAll: "Tout sélectionner",
+            uncheckAll: "Tout désélectionner",
+            buttonDefaultText: "Tout exporter",
             dynamicButtonTextSuffix: "colonnes affichées"
-		};
-		$scope.columnOptions = {
-			displayProp: "name",
-			selectedClasses: "btn btn-success",
-			buttonClasses: "btn btn-default",
-			scrollable: true,
-			scrollableHeight: '200px'
-		};
-		$scope.columns= properties.map(function(property){
-			return {name: property, id:property};
-		});
-		$scope.column = [];
+        };
+        $scope.columnOptions = {
+            displayProp: "name",
+            selectedClasses: "btn btn-info",
+            buttonClasses: "btn btn-default",
+            scrollable: true,
+            scrollableHeight: '200px'
+        };
+        $scope.columns = properties.map(function (property) {
+            return {
+                name: property,
+                id: property
+            };
+        });
+        $scope.column = [];
         $scope.yesno = [{
             name: "Oui",
-            id: 1
+            id: 1,
+            isBool: true,
+            boolValue: true
         }, {
             name: "Non",
-            id: 2
+            id: 2,
+            isBool: true,
+            boolValue: false
         }];
 
         $scope.adherent = [];
@@ -52,34 +61,41 @@
         $scope.cancel = function () {
             $scope.$dismiss();
         };
-        $scope.save = function () {
+        $scope.exportExcel = function () {
             var args = "";
-            properties.forEach(function (property) {
-                if ($scope[property]) {
-                    args += property;
-                    args += "=";
-                    if ($scope[property].id) {
-                        args += $scope[property].id;
-                    } else {
-                        args += $scope[property];
-                    }
-                    args += "&";
+            filterableProperties.forEach(function (property) {
+                if ($scope[property].length) {
+                    $scope[property].forEach(function (propertyValue) {
+                        args += property;
+                        args += "=";
+                        if (propertyValue.isBool) {
+                            args += propertyValue.boolValue;
+                        } else {
+                            args += propertyValue.id;
+                        }
+                        args += "&";
+                    });
                 }
             });
-
+            $scope.column.forEach(function (column) {
+                args += "col";
+                args += "=";
+                args += column.id;
+                args += "&";
+            });
+            var method;
             if (args) {
                 args = args.substring(0, args.length - 1);
-                var method = "";
-                if ($scope.editMode) {
-                    method = "update/" + $scope.id + "?";
-                } else {
-                    method = "create?";
-                }
-                $http.get("http://localhost:1337/contact/" + method + args).success(function () {
-                    $scope.$close();
-                });
+                method = "export/excel?" + args;
+            } else {
+                method = "export/excel";
             }
+            $window.open("http://localhost:1337/" + method, "_blank", "");
+            $scope.$close();
         };
+        $scope.exportMail = function () {};
+        $scope.exportTags = function () {};
+        $scope.exportPrint = function () {};
         $scope.refresh = function () {
             dropdownService.getCategories($scope);
         };
