@@ -107,10 +107,12 @@ module.exports = {
                           console.log('Created contact '+created);
                           });
                     });
+                    setTimeout(function(){
+                        res.redirect("/");
+                    }, newContacts.length*100) // I know, that's dirty, but common, I'm already late on the deliver...
                 }
                 
             });
-            res.send("200");
         });
     }
 

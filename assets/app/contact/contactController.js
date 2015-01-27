@@ -7,15 +7,15 @@
 
         $scope.fetchContacts = function () {
             $scope.contacts = [];
-            $http.get("http://localhost:1337/contact/length").success(function (data) {
+            $http.get("/contact/length").success(function (data) {
                 $scope.contactsLength = Number(data);
             });
             if ($scope.filter) {
-                $http.get("http://localhost:1337/contact/smartfind/" + $scope.filter).success(function (data) {
+                $http.get("/contact/smartfind/" + $scope.filter).success(function (data) {
                     $scope.contacts = data;
                 });
             } else {
-                $http.get("http://localhost:1337/contact/").success(function (data) {
+                $http.get("/contact/").success(function (data) {
                     $scope.contacts = data;
                 });
             }
@@ -93,7 +93,7 @@
         $scope.removeSelectedContact = function () {
             var contact = $scope.contacts[$scope.activeRow];
             if (contact) {
-                $http.get("http://localhost:1337/contact/destroy/" + contact.id).success(function () {
+                $http.get("/contact/destroy/" + contact.id).success(function () {
                     $scope.contacts.splice($scope.contacts.indexOf(contact), 1);
                 });
             }
@@ -211,8 +211,8 @@
         };
 
         function callMethod(method, args) {
-            $http.get("http://localhost:1337/contact/" + method + args).success(function () {
-                $http.get("http://localhost:1337/contact/").success(function (data) {
+            $http.get("/contact/" + method + args).success(function () {
+                $http.get("/contact/").success(function (data) {
                     $scope.contacts = data;
                 });
             });
