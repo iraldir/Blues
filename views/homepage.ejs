@@ -14,14 +14,14 @@
             <form class="navbar-form navbar-right" role="search">
                
                
-                <div class="form-group">
+                <!--<div class="form-group">
                    <div class="input-group">
                         <input type="number" min="1" class="form-control" ng-init="contactToGenerate=1" style="width:70px" ng-model="contactToGenerate">
                         <div class="input-group-btn">
                             <button class="btn btn-default" ng-click="generateFakeContacts()"><i class="fa fa-magic"></i></button>
                         </div>                       
                    </div>
-                </div>
+                </div>-->
                 <button class="btn btn-default" ng-click="openNewContactEditor()">Ajouter un contact&nbsp;<i class="fa fa-plus"></i>
                 </button>
                 <button class="btn btn-default" ng-click="openEditContactEditor()" ng-disabled="activeRow == undefined">Editer&nbsp;<i class="fa fa-pencil"></i>
@@ -29,6 +29,8 @@
                 <button class="btn btn-default" ng-click="removeSelectedContact()" ng-disabled="activeRow == undefined">Supprimer&nbsp;<i class="fa fa-trash-o"></i>
                 </button>
                 <button class="btn btn-default" ng-click="openExtraction()">Extraction&nbsp;<i class="fa fa-download"></i>
+                </button>
+                <button class="btn btn-default" ng-click="openUpload()">Import&nbsp;<i class="fa fa-upload"></i>
                 </button>
                  <button class="btn btn-default" ng-click="openSettingsEditor()">Paramètres&nbsp;<i class="fa fa-cogs"></i>
                 </button>

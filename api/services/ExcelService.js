@@ -1,4 +1,5 @@
 var stringify = require('csv-stringify');
+var parse = require('csv-parse');
 
 var allColumns = {
     title: {
@@ -88,13 +89,13 @@ var allColumns = {
     type: {
         key: "type",
         caption: "Type de contact",
-        type: "string",
+        type: "relation",
         width: 28
     },
     genre: {
         key: "genre",
         caption: "Genre de contact",
-        type: "string",
+        type: "relation",
         width: 28
     },
     adherent: {
@@ -105,7 +106,7 @@ var allColumns = {
     },
     benevole: {
         key: "benevole",
-        caption: "Bénévole",
+        caption: "Bénvole",
         type: "boolean",
         width: 28
     },
@@ -117,20 +118,20 @@ var allColumns = {
     },
     help: {
         key: "help",
-        caption: "Type de Mécénat",
-        type: "string",
+        caption: "Type de Mecenat",
+        type: "relation",
         width: 28
     },
     diverse1: {
         key: "diverse1",
         caption: "Divers I",
-        type: "string",
+        type: "relation",
         width: 28
     },
     diverse2: {
         key: "diverse2",
         caption: "Divers II",
-        type: "string",
+        type: "relation",
         width: 28
     },
     role: {
@@ -148,6 +149,35 @@ var allColumns = {
 };
 
 module.exports = {
+    parseExcel: function(options, callback){
+        parse(options.csv, {}, function(err, output){
+           var rows = output;
+            rows.shift(); // first line is seq=,
+            var columns = rows[0].map(function(col){
+                for (colKey in allColumns){
+                    if (allColumns[colKey].caption == col){
+                        return colKey;
+                    }
+                }
+                throw Error("Colonne inconnue " + col);
+            });
+            rows.shift();
+            contacts = rows.map(function(values){
+                var contact = {};
+                columns.forEach(function(colKey, index){
+                    var columnInfos = allColumns[colKey];
+                    if (columnInfos.type=="boolean"){
+                        contact[colKey] = (values[index] == "oui");
+                    } else {
+                        contact[colKey] = values[index];
+                    }
+                });
+                return contact;
+            });
+            callback(contacts);
+            
+        });
+    },
     generateExcel: function (options, res) {
         var cols = [];
         var rows = [];
@@ -158,8 +188,7 @@ module.exports = {
             });
         } else {
             cols = [];
-            for (var columnName in allColumns) {
-                
+            for (var columnName in allColumns) {    
                 cols.push(allColumns[columnName]);
             }
         }
@@ -167,7 +196,6 @@ module.exports = {
         cols.forEach(function (col) {
             rows[0].push(col.caption);
         });
-        sails.log.debug("options.contacts", options.contacts);
         options.contacts.forEach(function (contact) {
             rows.push([]);
             rows[rows.length - 1] = cols.map(function (col, i) {

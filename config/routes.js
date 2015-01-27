@@ -36,7 +36,8 @@ module.exports.routes = {
     view: 'homepage'
   },
   '/contact/smartfind/:query':'ContactController.smartfind',
-  '/export/excel':'ExportController.exportExcel'
+  '/export/excel':'ExportController.exportExcel',
+  '/import/excel':'ExportController.importExcel'
 
   /***************************************************************************
   *                                                                          *

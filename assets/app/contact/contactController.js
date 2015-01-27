@@ -82,6 +82,13 @@
                 size: 'lg'
             });
         };
+        $scope.openUpload = function(){
+            $modal.open({
+                templateUrl: "app/extraction/import.html",
+                controller: "ExtractionController",
+                size: 'lg'
+            });
+        }
 
         $scope.removeSelectedContact = function () {
             var contact = $scope.contacts[$scope.activeRow];
