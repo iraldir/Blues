@@ -24,7 +24,8 @@ module.exports = {
             }
         }
         Contact.find(searchQuery).exec(function (err, contacts) {
-            ExcelService.generateExcel({
+        
+        ExcelService.generateExcel({
                 contacts: contacts,
                 columns: columns
             }, res);

@@ -1,4 +1,4 @@
-var nodeExcel = require('excel-export');
+var stringify = require('csv-stringify');
 
 var allColumns = {
     title: {
@@ -149,27 +149,39 @@ var allColumns = {
 
 module.exports = {
     generateExcel: function (options, res) {
-        var conf = {};
-        
-        if (options.columns){
-            conf.cols = options.columns.map(function(columnName){
+        var cols = [];
+        var rows = [];
+
+        if (options.columns) {
+            cols = options.columns.map(function (columnName) {
                 return allColumns[columnName];
             });
         } else {
-            conf.cols = [];
-            for (var columnName in allColumns){
-                conf.cols.push(allColumns[columnName]);
+            cols = [];
+            for (var columnName in allColumns) {
+                
+                cols.push(allColumns[columnName]);
             }
         }
-        conf.rows = options.contacts.map(function(contact){
-            return conf.cols.map(function(col){
-                return contact[col.key] || "";
-            }); 
+        rows[0] = [];
+        cols.forEach(function (col) {
+            rows[0].push(col.caption);
         });
-            
-        var result = nodeExcel.execute(conf);
-        res.setHeader('Content-Type', 'application/vnd.openxmlformats');
-        res.setHeader("Content-Disposition", "attachment; filename=" + "Contacts Blet.xlsx");
-        res.end(result, 'binary');
+
+        options.contacts.forEach(function (contact) {
+            rows.push([]);
+            rows[rows.length - 1] = cols.map(function (col) {
+                return contact[col.key] || "";
+            });
+        });
+        
+        // var result = nodeExcel.execute(conf);       
+        stringify(rows, function (err, output) {
+            var result = "sep=,\n" + output;
+            res.setHeader('Content-Type', 'text/csv');
+            res.setHeader("Content-Disposition", "attachment; filename=" + "Contacts Blet.csv");
+            res.end(result, 'binary');
+        });
+
     }
 };
