@@ -23,7 +23,13 @@ module.exports = {
                 }
             }
         }
-        Contact.find(searchQuery).exec(function (err, contacts) {
+        Contact.find(searchQuery)
+        .populate('type')
+        .populate('genre')
+        .populate('help')
+        .populate('diverse1')
+        .populate('diverse2')
+        .exec(function (err, contacts) {
         
         ExcelService.generateExcel({
                 contacts: contacts,

@@ -100,19 +100,19 @@ var allColumns = {
     adherent: {
         key: "adherent",
         caption: "Adhérent",
-        type: "string",
+        type: "boolean",
         width: 28
     },
     benevole: {
         key: "benevole",
         caption: "Bénévole",
-        type: "string",
+        type: "boolean",
         width: 28
     },
     donor: {
         key: "donor",
         caption: "Donateur",
-        type: "string",
+        type: "boolean",
         width: 28
     },
     help: {
@@ -167,11 +167,15 @@ module.exports = {
         cols.forEach(function (col) {
             rows[0].push(col.caption);
         });
-
+        sails.log.debug("options.contacts", options.contacts);
         options.contacts.forEach(function (contact) {
             rows.push([]);
-            rows[rows.length - 1] = cols.map(function (col) {
-                return contact[col.key] || "";
+            rows[rows.length - 1] = cols.map(function (col, i) {
+                if (cols[i].type == "boolean"){
+                    return contact[col.key] ? "oui" : "non";
+                } else {
+                    return (contact[col.key] && contact[col.key].name ? contact[col.key].name : contact[col.key]) || "";
+                }
             });
         });
         
