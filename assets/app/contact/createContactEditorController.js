@@ -97,7 +97,7 @@
                 } else {
                     method = "create?";
                 }
-                $http.get("http://localhost:1337/contact/" + method + args).success(function () {
+                $http.get("/contact/" + method + args).success(function () {
                     $scope.$close();
                 });
             }

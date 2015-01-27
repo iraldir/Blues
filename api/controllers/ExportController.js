@@ -67,53 +67,62 @@ module.exports = {
     },
     importExcel: function (req, res) {
         console.log(req.file('csvFile'));
-        req.file('csvFile').upload({}, function done(err, uploadedFiles){
-            var uploadedFile = uploadedFiles[0];
-            var data = fs.readFileSync(uploadedFile.fd);
-            var buf = new Buffer(data, 'binary');
-            var translated = iconv.decode(buf, "win1250")
-            ExcelService.parseExcel({
-                csv: translated
-            }, function(newContacts){
-                getAllTypes(function(types){
-                    getAllGenres(function(genres){
-                        getAllHelps(function(helps){
-                            getAllDiverse1s(function(diverse1s){
-                                getAllDiverse2s(function(diverse2s){
-                                    addNewContacts({type: types, genre: genres, help: helps, diverse1: diverse1s, diverse2: diverse2s});                                    
+        var reqFile = req.file('csvFile');
+        if (reqFile){
+            reqFile.upload({}, function done(err, uploadedFiles){
+                var uploadedFile = uploadedFiles[0];
+                if (uploadedFile){
+                    var data = fs.readFileSync(uploadedFile.fd);
+                    var buf = new Buffer(data, 'binary');
+                    var translated = iconv.decode(buf, "win1250")
+                    ExcelService.parseExcel({
+                        csv: translated
+                    }, function(newContacts){
+                        getAllTypes(function(types){
+                            getAllGenres(function(genres){
+                                getAllHelps(function(helps){
+                                    getAllDiverse1s(function(diverse1s){
+                                        getAllDiverse2s(function(diverse2s){
+                                            addNewContacts({type: types, genre: genres, help: helps, diverse1: diverse1s, diverse2: diverse2s});                                    
+                                        });
+                                    });                      
                                 });
-                            });                      
+                            });
                         });
-                    });
-                });
-                
-                function addNewContacts(dependencies){
-                    sails.log.debug(newContacts);
-                    newContacts.forEach(function(newContact){
-                        for (relKey in dependencies){
-                            if (newContact[relKey]){
-                                var possibles = dependencies[relKey].filter(function(object){
-                                    return object.name == newContact[relKey];
-                                });
-                                if (possibles.length){
-                                    newContact[relKey] = possibles[0].id;
-                                } else {
-                                    delete newContact[relKey];
+
+                        function addNewContacts(dependencies){
+                            sails.log.debug(newContacts);
+                            newContacts.forEach(function(newContact){
+                                for (relKey in dependencies){
+                                    if (newContact[relKey]){
+                                        var possibles = dependencies[relKey].filter(function(object){
+                                            return object.name == newContact[relKey];
+                                        });
+                                        if (possibles.length){
+                                            newContact[relKey] = possibles[0].id;
+                                        } else {
+                                            delete newContact[relKey];
+                                        }
+                                    }
                                 }
-                            }
+
+                                Contact.create(newContact).exec(function createCB(err,created){
+                                  console.log('Created contact '+created);
+                                  });
+                            });
+                            setTimeout(function(){
+                                res.redirect("/");
+                            }, newContacts.length*100) // I know, that's dirty, but common, I'm already late on the deliver...
                         }
-                        
-                        Contact.create(newContact).exec(function createCB(err,created){
-                          console.log('Created contact '+created);
-                          });
-                    });
-                    setTimeout(function(){
-                        res.redirect("/");
-                    }, newContacts.length*100) // I know, that's dirty, but common, I'm already late on the deliver...
+                });
+                } else {
+                    res.redirect("/");
                 }
-                
+
             });
-        });
+        } else {
+            res.redirect("/");
+        }
     }
 
 };

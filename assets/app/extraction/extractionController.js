@@ -90,7 +90,7 @@
             } else {
                 method = "export/excel";
             }
-            $window.open("http://localhost:1337/" + method, "_blank", "");
+            $window.open("/" + method, "_blank", "");
             $scope.$close();
         };
         $scope.exportMail = function () {};
